@@ -4,10 +4,12 @@ import 'game_screen.dart';
 import 'high_scores_screen.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -17,9 +19,9 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => MenuScreen(),
-        '/game': (context) => GameScreen(),
-        '/high_scores': (context) => HighScoresScreen(),
+        '/': (context) => const MenuScreen(),
+        '/game': (context) => const GameScreen(),
+        '/high_scores': (context) => const HighScoresScreen(),
       },
     );
   }

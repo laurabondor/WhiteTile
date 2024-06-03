@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'high_scores_screen.dart';
 
 class MenuScreen extends StatelessWidget {
+  const MenuScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'White Tile Game',
           style: TextStyle(color: Colors.white),
         ),
@@ -23,20 +25,20 @@ class MenuScreen extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 'Welcome to',
                 style: TextStyle(fontSize: 24, color: Colors.white),
               ),
-              Text(
+              const Text(
                 'White Tile Game',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
                   Navigator.pushNamed(context, '/game');
                 },
-                child: Text(
+                child: const Text(
                   'New Game',
                   style: TextStyle(color: Colors.black),
                 ),
@@ -45,10 +47,10 @@ class MenuScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => HighScoresScreen()),
+                    MaterialPageRoute(builder: (context) => const HighScoresScreen()),
                   );
                 },
-                child: Text(
+                child: const Text(
                   'High Scores',
                   style: TextStyle(color: Colors.black),
                 ),

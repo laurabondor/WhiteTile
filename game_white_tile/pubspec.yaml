@@ -38,6 +38,7 @@ dependencies:
   audioplayers: ^6.0.0
   share: ^2.0.4
   shared_preferences: ^2.2.3
+  soundpool: ^2.4.1
 
 dev_dependencies:
   flutter_test:

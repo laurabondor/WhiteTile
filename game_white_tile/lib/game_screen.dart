@@ -6,18 +6,21 @@ import 'package:share/share.dart';
 import 'tile_widget.dart';
 
 class GameScreen extends StatefulWidget {
+  const GameScreen({super.key});
+
   @override
   _GameScreenState createState() => _GameScreenState();
 }
 
 class _GameScreenState extends State<GameScreen> {
   static const int gridSize = 4;
-  static const int initialSpeed = 500;
+  static const int initialSpeed = 750;
   final AudioPlayer _audioPlayer = AudioPlayer();
   List<List<bool>> grid = List.generate(gridSize, (_) => List.generate(gridSize, (_) => false));
   int score = 0;
   int speed = initialSpeed;
   bool gameOver = false;
+  bool restartRequested = false;
 
   @override
   void initState() {
@@ -30,22 +33,25 @@ class _GameScreenState extends State<GameScreen> {
       score = 0;
       speed = initialSpeed;
       gameOver = false;
+      restartRequested = false;
       grid = List.generate(gridSize, (_) => List.generate(gridSize, (_) => false));
     });
     gameLoop();
   }
 
   void gameLoop() async {
-    while (!gameOver) {
+    while (!gameOver && !restartRequested) {
       await Future.delayed(Duration(milliseconds: speed));
-      if (!gameOver) {
+      if (!gameOver && !restartRequested) {
         moveTilesDown();
         checkForGameOver();
         increaseSpeed();
       }
     }
-    saveHighScore();
-    showGameOverDialog();
+    if (!restartRequested) {
+      saveHighScore();
+      showGameOverDialog();
+    }
   }
 
   void moveTilesDown() {
@@ -85,8 +91,9 @@ class _GameScreenState extends State<GameScreen> {
     } else {
       setState(() {
         gameOver = true;
-        showGameOverDialog();
       });
+      saveHighScore();
+      showGameOverDialog();
     }
   }
 
@@ -112,7 +119,7 @@ class _GameScreenState extends State<GameScreen> {
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Game Over'),
+          title: const Text('Game Over'),
           content: Text('Your score: $score'),
           actions: [
             TextButton(
@@ -120,18 +127,18 @@ class _GameScreenState extends State<GameScreen> {
                 Navigator.of(context).pop();
                 startGame();
               },
-              child: Text('Restart'),
+              child: const Text('Restart'),
             ),
             TextButton(
               onPressed: shareScore,
-              child: Text('Share Score'),
+              child: const Text('Share Score'),
             ),
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
                 Navigator.of(context).pushReplacementNamed('/');
               },
-              child: Text('Back to Menu'),
+              child: const Text('Back to Menu'),
             ),
           ],
         );
