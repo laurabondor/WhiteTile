@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'high_scores_screen.dart';
 
 class MenuScreen extends StatelessWidget {
   const MenuScreen({super.key});
@@ -45,10 +44,7 @@ class MenuScreen extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const HighScoresScreen()),
-                  );
+                  Navigator.pushNamed(context, '/high_scores');
                 },
                 child: const Text(
                   'High Scores',

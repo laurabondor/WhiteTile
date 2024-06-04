@@ -7,7 +7,7 @@ class HighScoresScreen extends StatefulWidget {
   @override
   _HighScoresScreenState createState() => _HighScoresScreenState();
 }
-
+Future<void> loadHighScores() async
 class _HighScoresScreenState extends State<HighScoresScreen> {
   Set<int> highScores = {};
 
